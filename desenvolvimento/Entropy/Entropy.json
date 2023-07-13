@@ -4,6 +4,7 @@
   "ControlUniqueIds": {
     "App": 1,
     "Host": 3,
+    "Label1": 10,
     "Radio2": 5,
     "Screen1": 4,
     "txtCNPJ": 6,
@@ -13,7 +14,7 @@
   },
   "FunctionParamsInvariantScripts": {},
   "FunctionParamsInvariantScriptsOnInstances": {},
-  "HeaderLastSavedDateTimeUTC": "07/13/2023 19:01:21",
+  "HeaderLastSavedDateTimeUTC": "07/13/2023 19:04:16",
   "IsLegacyComponentAllowGlobalScopeCase": false,
   "LocalConnectionIDReferences": {},
   "LocalDatabaseReferencesAsEmpty": false,
@@ -28,12 +29,14 @@
   "OrderPcfTemplate": {},
   "OrderTemplate": {},
   "OrderXMLTemplate": {
+    "label": 1,
     "radio": 0,
-    "text": 1
+    "text": 2
   },
   "OverridablePropertiesEntry": {
     "App": {},
     "Host": {},
+    "Label1": {},
     "Radio2": {},
     "Screen1": {},
     "txtCNPJ": {},
@@ -46,6 +49,7 @@
   "PublishOrderIndices": {
     "App": 0,
     "Host": 0,
+    "Label1": 0,
     "Radio2": 0,
     "Screen1": 0,
     "txtCNPJ": 1,

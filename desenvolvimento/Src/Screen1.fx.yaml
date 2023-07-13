@@ -221,3 +221,11 @@ Screen1 As screen:
         Y: =481
         ZIndex: =5
 
+    Label1 As label:
+        Height: =77
+        Text: ="Inclusão de texto"
+        Width: =427
+        X: =718
+        Y: =361
+        ZIndex: =6
+
