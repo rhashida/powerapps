@@ -1,0 +1,223 @@
+Screen1 As screen:
+    OnVisible: =
+
+    txtCNPJ As text:
+        BorderColor: =ColorFade(Self.Color, 50%)
+        BorderThickness: =1
+        Default: =If(Radio2.Selected.Value="Pessoa física",VarMascaraCPF,If(Radio2.Selected.Value="Pessoa jurídica",VarMascara))
+        FocusedBorderThickness: =1
+        Height: =30
+        HintText: =If(Radio2.Selected.Value = "Pessoa jurídica", "CNPJ", If(Radio2.Selected.Value = "Pessoa física", "CPF"))
+        HoverBorderColor: =ColorFade(Self.Color, 50%)
+        HoverFill: =RGBA(255, 255, 255, 1)
+        MaxLength: =If(Radio2.Selected.Value = "Pessoa jurídica", 18, 14)
+        OnChange: |-
+            =//1ª Condição
+            If(Radio2.Selected.Value = "Pessoa jurídica", 
+            
+            //2ªCondição
+            If(IsNumeric(Self.Text) And Len(Self.Text) = 14, 
+            
+            //TRUE - 2ª Condição
+            UpdateContext({VarPrimeiroDigito: Mod((Mid(Self.Text, 1, 1) * 5 + Mid(Self.Text, 2, 1) * 4 + Mid(Self.Text, 3, 1) * 3 + Mid(Self.Text, 4, 1) * 2 + Mid(Self.Text, 5, 1) * 9 + Mid(Self.Text, 6, 1) * 8 + Mid(Self.Text, 7, 1) * 7 + Mid(Self.Text, 8, 1) * 6 + Mid(Self.Text, 9, 1) * 5 + Mid(Self.Text, 10, 1) * 4 + Mid(Self.Text, 11, 1) * 3 + Mid(Self.Text, 12, 1) * 2), 11)});
+            
+            //Regra específica da validação do CNPJ
+            If(VarPrimeiroDigito < 2, UpdateContext({VarPrimeiroDigito: 0}), UpdateContext({VarPrimeiroDigito: 11 - VarPrimeiroDigito}));
+            
+            UpdateContext({VarSegundoDigito: Mod((Mid(Self.Text, 1, 1) * 6 + Mid(Self.Text, 2, 1) * 5 + Mid(Self.Text, 3, 1) * 4 + Mid(Self.Text, 4, 1) * 3 + Mid(Self.Text, 5, 1) * 2 + Mid(Self.Text, 6, 1) * 9 + Mid(Self.Text, 7, 1) * 8 + Mid(Self.Text, 8, 1) * 7 + Mid(Self.Text, 9, 1) * 6 + Mid(Self.Text, 10, 1) * 5 + Mid(Self.Text, 11, 1) * 4 + Mid(Self.Text, 12, 1) * 3 + Mid(Self.Text, 13, 1) * 2), 11)});
+            
+            //Regra específica da validação do CNPJ
+            If(VarSegundoDigito < 2, UpdateContext({VarSegundoDigito: 0}), UpdateContext({VarSegundoDigito: 11 - VarSegundoDigito}));
+            
+            //3ª Condição
+            If(VarPrimeiroDigito = Value(Mid(Self.Text, 13, 1)) And VarSegundoDigito = Value(Mid(Self.Text, 14, 1)), 
+            
+            //TRUE - 3ª Condição
+            UpdateContext({VarMascara: Left(Self.Text, 2) & "." & Mid(Self.Text, 3, 3) & "." & Mid(Self.Text, 6, 3) & "/" & Mid(Self.Text, 9, 4) & "-" & Right(Self.Text, 2)}), 
+            
+            //FALSE - 3ª Condição
+            Notify("Por favor inserir um CNPJ válido!", NotificationType.Error, 1500);
+            UpdateContext({VarPrimeiroDigito: Blank(), VarSegundoDigito: Blank(), VarMascara: Blank()});
+            Reset(Self)
+            
+            ), //FIM 3ª Condição
+            
+            //FALSE - 2ª Condição
+            Notify("Por favor inserir apenas 14 números!", NotificationType.Error, 1500);
+            UpdateContext({VarPrimeiroDigito: Blank(), VarSegundoDigito: Blank(), VarMascara: Blank()});
+            Reset(Self)
+            
+            ), //FIM 2ª Condição
+            
+            
+            //4ª Condição
+            If(IsNumeric(Self.Text) And Len(Self.Text) = 11, 
+            
+            //TRUE - 4ª Condição
+            UpdateContext({VarPrimeiroDigito: Mod(((Mid(Self.Text, 1, 1) * 10 + Mid(Self.Text, 2, 1) * 9 + Mid(Self.Text, 3, 1) * 8 + Mid(Self.Text, 4, 1) * 7 + Mid(Self.Text, 5, 1) * 6 + Mid(Self.Text, 6, 1) * 5 + Mid(Self.Text, 7, 1) * 4 + Mid(Self.Text, 8, 1) * 3 + Mid(Self.Text, 9, 1) * 2) * 10), 11)});
+            
+            //Regra específica da validação do CPF
+            If(VarPrimeiroDigito = 10, UpdateContext({VarPrimeiroDigito: 0}));
+            
+            UpdateContext({VarSegundoDigito: Mod(((Mid(Self.Text, 1, 1) * 11 + Mid(Self.Text, 2, 1) * 10 + Mid(Self.Text, 3, 1) * 9 + Mid(Self.Text, 4, 1) * 8 + Mid(Self.Text, 5, 1) * 7 + Mid(Self.Text, 6, 1) * 6 + Mid(Self.Text, 7, 1) * 5 + Mid(Self.Text, 8, 1) * 4 + Mid(Self.Text, 9, 1) * 3 + Mid(Self.Text, 10, 1) * 2) * 10), 11)});
+            
+            //Regra específica da validação do CPF
+            If(VarSegundoDigito = 10, UpdateContext({VarSegundoDigito: 0}));
+            
+            //5ª Condição
+            If(VarPrimeiroDigito = Value(Mid(Self.Text, 10, 1)) And VarSegundoDigito = Value(Mid(Self.Text, 11, 1)), 
+            
+            //TRUE - 5ª Condição
+            UpdateContext({VarMascaraCPF: Left(Self.Text, 3) & "." & Mid(Self.Text, 4, 3) & "." & Mid(Self.Text, 7, 3) & "-" & Right(Self.Text, 2)}), 
+            
+            //FALSE - 5ª Condição
+            Notify("Por favor inserir um CPF válido!", NotificationType.Error, 1500);
+            UpdateContext({VarPrimeiroDigito: Blank(), VarSegundoDigito: Blank(), VarMascara: Blank()});
+            Reset(Self)
+            
+            ), //FIM 5ª Condição
+            
+            //FALSE - 4ªCondição
+            Notify("Por favor inserir apenas 11 números!", NotificationType.Error, 1500);
+            UpdateContext({VarPrimeiroDigito: Blank(), VarSegundoDigito: Blank(), VarMascara: Blank()});
+            Reset(Self)
+            
+            ) //FIM 4ª Condição
+            
+            ) //FIM 1ª Condição
+        PaddingLeft: =5
+        PressedBorderColor: =txtCNPJ.HoverBorderColor
+        PressedColor: =txtCNPJ.Color
+        PressedFill: =txtCNPJ.Fill
+        RadiusBottomLeft: =2
+        RadiusBottomRight: =2
+        RadiusTopLeft: =2
+        RadiusTopRight: =2
+        Size: =9
+        TabIndex: =4
+        Width: =307
+        X: =102
+        Y: =246
+        ZIndex: =1
+
+    Radio2 As radio:
+        BorderColor: =RGBA(0, 0, 0, 1)
+        FocusedBorderThickness: =0
+        Height: =51
+        HoverColor: =RGBA(0, 0, 0, 1)
+        HoverFill: =Radio2.Fill
+        Items: =["Pessoa física", "Pessoa jurídica"]
+        Layout: =Layout.Horizontal
+        OnChange: |
+            =If(Radio2.Selected.Value = "Pessoa física",
+            
+            //TRUE
+            UpdateContext({VarMascara: "Exibir"});
+            Reset(txtCNPJ), 
+            
+            //FALSE
+            UpdateContext({VarMascara: Blank()});
+            Reset(txtCNPJ)
+            
+            ) //FIM IF
+        OnSelect: =
+        PressedColor: =
+        PressedFill: =Radio2.Fill
+        RadioBorderColor: =Color.Black
+        RadioSelectionFill: =Color.Black
+        RadioSize: =30
+        Size: =9
+        TabIndex: =1
+        Width: =299
+        X: =84
+        Y: =177
+        ZIndex: =2
+
+    txtCPF As text:
+        Default: =""
+        Format: =TextFormat.Number
+        OnChange: =
+        X: =102
+        Y: =321
+        ZIndex: =3
+
+    txtCPFmascara As text:
+        Default: |-
+            =With(
+                {
+                    Entrada: txtCPF.Text,
+                    Len: Len(txtCPF.Text)
+                },
+                Concat(
+                    ForAll(
+                        Sequence(
+                            Len,
+                            1,
+                            1
+                        ),
+                        {
+                            ID: Value,
+                            Caracter: Mid(
+                                Entrada,
+                                Value,
+                                1
+                            )
+                        }
+                    ),
+                    Switch(
+                        ID,
+                        4,
+                        ".",
+                        7,
+                        ".",
+                        10,
+                        "-"
+                    ) & Caracter
+                )
+            )
+        OnChange: =
+        X: =102
+        Y: =398
+        ZIndex: =4
+
+    txtCNPJmascara As text:
+        Default: |-
+            =With(
+                {
+                    Entrada: txtCPF.Text,
+                    Len: Len(txtCPF.Text)
+                },
+                Concat(
+                    ForAll(
+                        Sequence(
+                            Len,
+                            1,
+                            1
+                        ),
+                        {
+                            ID: Value,
+                            Caracter: Mid(
+                                Entrada,
+                                Value,
+                                1
+                            )
+                        }
+                    ),
+                    Switch(
+                        ID,
+                        3,
+                        ".",
+                        6,
+                        ".",
+                        9,
+                        "/",
+                        13,
+                        "-"
+                    ) & Caracter
+                )
+            )
+        OnChange: =
+        X: =102
+        Y: =481
+        ZIndex: =5
+

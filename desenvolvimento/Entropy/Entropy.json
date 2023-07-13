@@ -1,0 +1,69 @@
+{
+  "ComponentIndexes": {},
+  "ControlUniqueGuids": {},
+  "ControlUniqueIds": {
+    "App": 1,
+    "Host": 3,
+    "Radio2": 5,
+    "Screen1": 4,
+    "txtCNPJ": 6,
+    "txtCNPJmascara": 9,
+    "txtCPF": 7,
+    "txtCPFmascara": 8
+  },
+  "FunctionParamsInvariantScripts": {},
+  "FunctionParamsInvariantScriptsOnInstances": {},
+  "HeaderLastSavedDateTimeUTC": "07/13/2023 19:01:21",
+  "IsLegacyComponentAllowGlobalScopeCase": false,
+  "LocalConnectionIDReferences": {},
+  "LocalDatabaseReferencesAsEmpty": false,
+  "LocalResourceFileNames": {},
+  "LocalResourceRootPaths": {},
+  "OrderComponentMetadata": {},
+  "OrderComponentTemplate": {},
+  "OrderDataSource": {
+    "RadioSample": 0
+  },
+  "OrderGroupControls": {},
+  "OrderPcfTemplate": {},
+  "OrderTemplate": {},
+  "OrderXMLTemplate": {
+    "radio": 0,
+    "text": 1
+  },
+  "OverridablePropertiesEntry": {
+    "App": {},
+    "Host": {},
+    "Radio2": {},
+    "Screen1": {},
+    "txtCNPJ": {},
+    "txtCNPJmascara": {},
+    "txtCPF": {},
+    "txtCPFmascara": {}
+  },
+  "PCFDynamicSchemaForIRRetrievalEntry": {},
+  "PCFTemplateEntry": {},
+  "PublishOrderIndices": {
+    "App": 0,
+    "Host": 0,
+    "Radio2": 0,
+    "Screen1": 0,
+    "txtCNPJ": 1,
+    "txtCNPJmascara": 4,
+    "txtCPF": 2,
+    "txtCPFmascara": 3
+  },
+  "ResourcesJsonIndices": {},
+  "RuleScreenIdWithoutScreen": {},
+  "TemplateVersions": {},
+  "VolatileProperties": {
+    "AnalysisLoadTime": 0.127998,
+    "ControlCount": {
+      "radio": 1,
+      "screen": 1,
+      "text": 4
+    },
+    "DeserializationLoadTime": 0.3304332
+  },
+  "WasLocalDatabaseReferencesEmpty": true
+}
